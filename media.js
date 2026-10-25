@@ -51,8 +51,12 @@ const TREE = {
     "Dale🥜": []
    },
    "Lost River Delta": {
-    "Chip🥜": [],
-    "Dale🥜": []
+    "Chip🥜": [
+     "sea/greeting/Lost River Delta/Chip🥜/IMG_5214.JPG"
+    ],
+    "Dale🥜": [
+     "sea/greeting/Lost River Delta/Dale🥜/IMG_5222.JPG"
+    ]
    },
    "Port Discovery": {
     "Chip🥜": [],
