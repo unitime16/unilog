@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ゆにろぐ | UniLog</title>
+<style>
+:root{--bg:#f6ecdc;--card:#fffaf0;--ink:#4a2f1d;--sub:#8a6a50;--acc:#8b5a2b;--acc2:#c98a4b;--line:#e3cfb2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#2a1c12;--card:#3a281b;--ink:#f3e4cd;--sub:#c4a688;--acc:#d9a066;--acc2:#b87a3d;--line:#5a4130}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#2a1c12;--card:#3a281b;--ink:#f3e4cd;--sub:#c4a688;--acc:#d9a066;--acc2:#b87a3d;--line:#5a4130}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","Zen Maru Gothic","Hiragino Sans",sans-serif;min-height:100vh}
+header{text-align:center;padding:24px 16px 8px}
+h1{margin:0;font-size:2rem;color:var(--acc);letter-spacing:.08em}
+h1 small{display:block;font-size:.8rem;color:var(--sub);letter-spacing:.2em;margin-top:2px}
+main{max-width:720px;margin:0 auto;padding:12px 16px 48px}
+.crumb{display:flex;align-items:center;gap:8px;margin:8px 0 16px;color:var(--sub);font-size:.9rem;flex-wrap:wrap}
+.back{border:1px solid var(--line);background:var(--card);color:var(--acc);border-radius:20px;padding:6px 14px;font:inherit;cursor:pointer}
+h2{font-size:1.15rem;margin:0 0 14px}
+.grid{display:grid;gap:12px}
+.big{grid-template-columns:1fr 1fr}
+.btn{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:20px;padding:18px 14px;font:inherit;font-size:1rem;cursor:pointer;text-align:center;box-shadow:0 3px 0 var(--line)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
+.btn.xl{padding:36px 10px;font-size:1.2rem;font-weight:bold}
+.btn .e{display:block;font-size:2.4rem;margin-bottom:6px}
+.btn .n{display:block;font-size:.75rem;color:var(--sub);margin-top:4px}
+.list .btn{text-align:left;display:flex;justify-content:space-between;align-items:center}
+.list .btn::after{content:"›";color:var(--acc2);font-size:1.4rem}
+.add{display:block;text-align:center;background:var(--acc);color:var(--bg);border-radius:20px;padding:12px;cursor:pointer;margin-bottom:16px}
+.add input{display:none}
+.media{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.media video,.media img{width:100%;border-radius:14px;background:#000;max-height:360px;object-fit:cover}
+.empty{text-align:center;color:var(--sub);padding:36px 12px;border:2px dashed var(--line);border-radius:20px;line-height:1.8}
+footer{text-align:center;color:var(--sub);font-size:.75rem;padding-bottom:24px}
+.addf{display:flex;gap:8px;margin-top:18px}.addf input{flex:1;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:20px;padding:10px 14px;font:inherit}
+.x{color:var(--sub);font-size:.8rem;text-align:center;margin:8px 0}.mi{position:relative}.del0{position:absolute;top:6px;right:6px;border:0;background:rgba(0,0,0,.45);border-radius:50%;width:30px;height:30px;cursor:pointer}
+</style>
+</head>
+<body>
+<header><h1>🐿️ ゆにろぐ 🐿️<small>UniLog</small></h1></header>
+<main><div id="crumb" class="crumb"></div><div id="view"></div></main>
+<footer>🥜 ３栗鼠と、おたくのおもいで 🌼</footer>
+<script>
+// 動画を別の場所(R2など)に置くときは、そのURLをここに入れる。例: "https://media.example.com/"
+const MEDIA_BASE="media/";
+const L={land:["🏰","ランド"],sea:["🌋","シー"],show:["🎭","ショー"],parade:["🎠","パレード"],greeting:["🤝","グリーティング"]};
+const Q={"":"どっちに行く?","land":"ランド:なにを見る?","sea":"シー:どのショー?","land/greeting":"だれに会った?"};
+const VID=/\.(mp4|m4v|mov|webm)$/i;
+let TREE={},path=[];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const url=f=>MEDIA_BASE+f.split("/").map(encodeURIComponent).join("/");
+const node=p=>p.reduce((n,k)=>n&&n[k],TREE);
+const total=n=>Array.isArray(n)?n.length:Object.values(n).reduce((s,x)=>s+total(x),0);
+const lab=k=>L[k]?L[k][1]:k;
+function go(p){path=p;render();scrollTo(0,0)}
+function render(){
+ const n=node(path),v=$("view"),c=$("crumb");let h="";
+ const k=path.join("/"),leaf=Array.isArray(n);
+ const title=leaf?lab(path[path.length-1]):(Q[k]||(path.length===3&&path[1]==="greeting"?lab(path[2])+":どこで会った?":lab(path[path.length-1])));
+ if(!n){h=`<div class="empty">まだありません</div>`}
+ else if(leaf){
+  h=n.length?`<div class="grid media">`+n.map(f=>VID.test(f)?`<video src="${url(f)}" controls playsinline preload="metadata"></video>`:`<img src="${url(f)}" alt="" loading="lazy">`).join("")+`</div>`:`<div class="empty">🌰<br>まだ思い出がありません</div>`;
+ }else{
+  const keys=Object.keys(n),big=keys.every(x=>L[x]);
+  h=`<div class="grid ${big?'big':'list'}">`+keys.map(x=>{const c=total(n[x]);return `<button class="btn ${big?'xl':''}" data-k="${esc(x)}">${big?`<span class="e">${L[x][0]}</span>`:""}${esc(lab(x))}<span class="n">${c?c+"件":""}</span></button>`}).join("")+`</div>`;
+ }
+ c.innerHTML=(path.length?`<button class="back" id="bk">← もどる</button>`:"")+`<span>${esc(["ホーム",...path.map(lab)].join(" › "))}</span>`;
+ v.innerHTML=`<h2>${esc(title)}</h2>`+h;
+ if($("bk"))$("bk").onclick=()=>go(path.slice(0,-1));
+ v.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>go([...path,b.dataset.k]));
+}
+fetch("media.json").then(r=>r.json()).then(t=>{TREE=t;render()}).catch(()=>{$("view").innerHTML=`<div class="empty">media.json が見つかりません。<br>build.py を実行してください</div>`});
+</script>
+</body>
+</html>
