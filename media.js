@@ -39,6 +39,24 @@ const TREE = {
   }
  },
  "sea": {
-  "ショー名1": []
+  "greeting": {
+   "American Waterfront": {
+    " Chip🥜": [],
+    " Dale🥜": [],
+    "Clarice🌼": []
+   },
+   "Disney Sea Plaza": {
+    "Chip🥜": [],
+    "Clarice🌼": [],
+    "Dale🥜": []
+   },
+   "Lost River Delta": [],
+   "Port Discovery": []
+  },
+  "show": {
+   "Dance the Globe!": [],
+   "Dockside Splash Remix": [],
+   "Sparking Jubilee Celebration": []
+  }
  }
 };

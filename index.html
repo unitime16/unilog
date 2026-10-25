@@ -47,7 +47,7 @@ footer{text-align:center;color:var(--sub);font-size:.75rem;padding-bottom:24px}
 // 動画を別の場所(R2など)に置くときは、そのURLをここに入れる。例: "https://media.example.com/"
 const MEDIA_BASE="media/";
 const L={land:["🏰","ランド"],sea:["🌋","シー"],show:["🎭","ショー"],parade:["🎠","パレード"],greeting:["🤝","グリーティング"]};
-const Q={"":"パークを選択","land":"ランド:なにを見る?","sea":"シー:どのショー?","land/greeting":"エリアを選択","land/greeting/Entrance":"キャラクターを選択"};
+const Q={"":"パークを選択","land":"何を見る?","sea":"何を見る?","land/greeting":"エリアを選択","sea/greeting":"エリアを選択"};
 
 const VID=/\.(mp4|m4v|mov|webm)$/i;
 let path=[];
@@ -61,7 +61,7 @@ function go(p){path=p;render();scrollTo(0,0)}
 function render(){
  const n=node(path),v=$("view"),c=$("crumb");let h="";
  const k=path.join("/"),leaf=Array.isArray(n);
- const title=leaf?lab(path[path.length-1]):(Q[k]||(path.length===3&&path[1]==="greeting"?lab(path[2])+":どこで会った?":lab(path[path.length-1])));
+  const title=leaf?lab(path[path.length-1]):(Q[k]||(path.length===3&&path[1]==="greeting"?"キャラを選択":lab(path[path.length-1])));
  if(!n){h=`<div class="empty">まだありません</div>`}
  else if(leaf){
   h=n.length?`<div class="grid media">`+n.map(f=>VID.test(f)?`<video src="${url(f)}" controls playsinline preload="metadata"></video>`:`<img src="${url(f)}" alt="" loading="lazy">`).join("")+`</div>`:`<div class="empty">🌰<br>まだ思い出がありません</div>`;
