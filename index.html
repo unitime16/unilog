@@ -47,7 +47,8 @@ footer{text-align:center;color:var(--sub);font-size:.75rem;padding-bottom:24px}
 // 動画を別の場所(R2など)に置くときは、そのURLをここに入れる。例: "https://media.example.com/"
 const MEDIA_BASE="media/";
 const L={land:["🏰","ランド"],sea:["🌋","シー"],show:["🎭","ショー"],parade:["🎠","パレード"],greeting:["🤝","グリーティング"]};
-const Q={"":"どっちに行く?","land":"ランド:なにを見る?","sea":"シー:どのショー?","land/greeting":"だれに会った?"};
+const Q={"":"パークを選択","land":"ランド:なにを見る?","sea":"シー:どのショー?","land/greeting":"エリアを選択","land/greeting/Entrance":"キャラクターを選択"};
+
 const VID=/\.(mp4|m4v|mov|webm)$/i;
 let path=[];
 const $=id=>document.getElementById(id);
