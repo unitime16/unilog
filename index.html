@@ -41,14 +41,15 @@ footer{text-align:center;color:var(--sub);font-size:.75rem;padding-bottom:24px}
 <body>
 <header><h1>🐿️ ゆにろぐ 🐿️<small>UniLog</small></h1></header>
 <main><div id="crumb" class="crumb"></div><div id="view"></div></main>
-<footer>🥜 ３栗鼠と、おたくのおもいで 🌼</footer>
+<footer>🥜 ３栗鼠とおたくのおもいで 🌼</footer>
+<script src="media.js"></script>
 <script>
 // 動画を別の場所(R2など)に置くときは、そのURLをここに入れる。例: "https://media.example.com/"
 const MEDIA_BASE="media/";
 const L={land:["🏰","ランド"],sea:["🌋","シー"],show:["🎭","ショー"],parade:["🎠","パレード"],greeting:["🤝","グリーティング"]};
 const Q={"":"どっちに行く?","land":"ランド:なにを見る?","sea":"シー:どのショー?","land/greeting":"だれに会った?"};
 const VID=/\.(mp4|m4v|mov|webm)$/i;
-let TREE={},path=[];
+let path=[];
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const url=f=>MEDIA_BASE+f.split("/").map(encodeURIComponent).join("/");
@@ -72,7 +73,7 @@ function render(){
  if($("bk"))$("bk").onclick=()=>go(path.slice(0,-1));
  v.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>go([...path,b.dataset.k]));
 }
-fetch("media.json").then(r=>r.json()).then(t=>{TREE=t;render()}).catch(()=>{$("view").innerHTML=`<div class="empty">media.json が見つかりません。<br>build.py を実行してください</div>`});
+render();
 </script>
 </body>
 </html>
