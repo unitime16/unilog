@@ -50,8 +50,14 @@ const TREE = {
     "Clarice🌼": [],
     "Dale🥜": []
    },
-   "Lost River Delta": [],
-   "Port Discovery": []
+   "Lost River Delta": {
+    "Chip🥜": [],
+    "Dale🥜": []
+   },
+   "Port Discovery": {
+    "Chip🥜": [],
+    "Dale🥜": []
+   }
   },
   "show": {
    "Dance the Globe!": [],
