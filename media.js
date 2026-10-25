@@ -43,7 +43,11 @@ const TREE = {
    "American Waterfront": {
     " Chip🥜": [],
     " Dale🥜": [],
-    "Clarice🌼": []
+    "Clarice🌼": [
+     "sea/greeting/American Waterfront/Clarice🌼/IMG_0812.JPG",
+     "sea/greeting/American Waterfront/Clarice🌼/IMG_1132.JPG",
+     "sea/greeting/American Waterfront/Clarice🌼/IMG_2051.JPG"
+    ]
    },
    "Disney Sea Plaza": {
     "Chip🥜": [],
@@ -66,7 +70,29 @@ const TREE = {
   "show": {
    "Dance the Globe!": [],
    "Dockside Splash Remix": [],
-   "Sparking Jubilee Celebration": []
+   "Sparking Jubilee Celebration": [
+    "sea/show/Sparking Jubilee Celebration/IMG_0844.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_0875 2.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_0875.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_0915.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1029.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1038.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1148.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1151.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1161.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1162.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1275.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1367.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1404.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1502.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1800.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1859.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1887.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1900.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1924.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_1932.JPG",
+    "sea/show/Sparking Jubilee Celebration/IMG_2014.JPG"
+   ]
   }
  }
 };
